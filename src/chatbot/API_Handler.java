@@ -12,15 +12,22 @@ public class API_Handler {
   private static final String METHOD = "POST";
   private static final int MAX_TOKENS = 500;
   private static final float TEMPERATURE = 0;
+  private JSONParser parser;
+
+  private void init() {
+    this.parser = new JSONParser();
+  }
 
   // dev: Constructors
   public API_Handler(String url) {
     this.URL = url;
+    this.init();
   }
 
   public API_Handler() {
-    // dev: Dummy API URL
+    // dev: Open API URL
     this.URL = "https://api.openai.com/v1/completions";
+    this.init();
   }
 
   // *** Sample Request URL
@@ -65,6 +72,6 @@ public class API_Handler {
       return e.toString();
     }
 
-    return response.body();
+    return parser.parseMessage(response.body());
   }
 }
