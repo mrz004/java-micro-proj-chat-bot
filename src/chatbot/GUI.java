@@ -4,7 +4,6 @@ import chatbot.util.API_Handler;
 import chatbot.util.gui.BotMessageBox;
 import chatbot.util.gui.UserMessageBox;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame {
 

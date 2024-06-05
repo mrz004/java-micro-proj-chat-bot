@@ -28,6 +28,12 @@ This Chat Bot allows users to type their message/question and get answer from th
    1. Open the `App.java` file
    1. Click the `run` button above the `main` method
 
+## Screenshots
+
+![Simple GUI](images/ss1.png)
+![Some Conversation](images/ss2.png)
+![Multiline Prompt](images/ss3.png)
+
 ## Conclusion
 
 This is just a college project and may not be perfect.
