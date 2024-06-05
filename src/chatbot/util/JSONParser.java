@@ -1,4 +1,4 @@
-package chatbot;
+package chatbot.util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -1,7 +1,11 @@
 package chatbot;
 
+import chatbot.util.API_Handler;
+import chatbot.util.gui.BotMessageBox;
+import chatbot.util.gui.UserMessageBox;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -17,105 +21,13 @@ import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame {
 
-  private class MessageBox extends JPanel {
-
-    private String author, text;
-    private JLabel authLabel;
-    private JTextArea textLabel;
-
-    private void render() {
-      this.authLabel = new JLabel(author);
-      this.textLabel = new JTextArea(text);
-      this.textLabel.setLineWrap(true);
-      this.textLabel.setEditable(false);
-      this.textLabel.setBackground(new Color(255, 255, 255, 150));
-
-      this.authLabel.setBorder(new EmptyBorder(0, 5, 5, 0));
-      this.textLabel.setBorder(new EmptyBorder(2, 5, 5, 0));
-      this.setBorder(new EmptyBorder(10, 10, 0, 0));
-
-      // this.set
-      this.setLayout(new BorderLayout());
-      this.add(this.authLabel, BorderLayout.NORTH);
-      this.add(this.textLabel, BorderLayout.CENTER);
-    }
-
-    MessageBox(String author, String text) {
-      this.author = author;
-      this.text = text;
-      this.render();
-    }
-
-    MessageBox() {
-      this.author = "unknown";
-      this.text = "...";
-      this.render();
-    }
-
-    public void setColor(int color) {
-      this.setBackground(new Color(color));
-    }
-
-    public String getAuthor() {
-      return author;
-    }
-
-    public void setAuthor(String author) {
-      this.author = author;
-      this.authLabel.setText(author);
-    }
-
-    public String getText() {
-      return text;
-    }
-
-    public void setText(String text) {
-      this.text = text;
-      this.textLabel.setText(text);
-    }
-  }
-
-  private class UserMessageBox extends MessageBox {
-
-    private void paint() {
-      this.setColor(0xE7F2F8);
-    }
-
-    UserMessageBox(String author, String text) {
-      super(author, text);
-      this.paint();
-    }
-
-    UserMessageBox() {
-      super();
-      this.paint();
-    }
-  }
-
-  private class BotMessageBox extends MessageBox {
-
-    private void paint() {
-      this.setColor(0xF0F0F0);
-    }
-
-    BotMessageBox(String author, String text) {
-      super(author, text);
-      this.paint();
-    }
-
-    BotMessageBox() {
-      super();
-      this.paint();
-    }
-  }
-
   private class InputBox extends JPanel {
 
     public JTextArea textArea;
     public JButton button;
 
     public void handlePrompt() {
-      String text = this.textArea.getText();
+      String text = this.textArea.getText().trim();
       this.textArea.setText("");
       if (text == null || text.length() == 0) return;
 
@@ -138,6 +50,10 @@ public class GUI extends JFrame {
     InputBox() {
       this.textArea = new JTextArea(5, 9);
       this.button = new JButton("🚀");
+      JLabel jl = new JLabel("Press CTRL + ENTER to send. ll");
+
+      jl.setFont(new Font("Comic Sans MS", Font.ITALIC, 8));
+
       this.button.setToolTipText("Hit CTRL + ENTER to submit the prompt.");
       this.textArea.setToolTipText("Hit CTRL + ENTER to submit the prompt.");
 
@@ -169,6 +85,7 @@ public class GUI extends JFrame {
         );
 
       this.setLayout(new BorderLayout());
+      this.add(jl, BorderLayout.NORTH);
       this.add(new JScrollPane(textArea), BorderLayout.CENTER);
       this.add(button, BorderLayout.EAST);
     }
